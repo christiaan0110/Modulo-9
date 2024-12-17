@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Wars Quiz</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Fondo de estrellas */
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: black;
+            overflow: hidden;
+        }
+
+        .stars::before, .stars::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 200%;
+
+            background-size: 50px 50px;
+            animation: moveStars 50s linear infinite;
+        }
+
+        .stars::after {
+            background-size: 100px 100px;
+            animation-duration: 100s;
+            opacity: 0.5;
+        }
+
+        @keyframes moveStars {
+            from { transform: translateX(0) translateY(0); }
+            to { transform: translateX(-50px) translateY(-50px); }
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 2.5rem;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+
+        input {
+            margin-bottom: 15px;
+            padding: 10px;
+
+            background: black;
+
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: yellow;
+            color: black;
+        }
+
+        h2 {
+            margin-top: 20px;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <h1>Star wars: El Lado Oscuro de la Programacion</h1>
+    <form method="post">
+        <p>1. ¿En cuántas películas aparecen planetas cuyo clima sea árido?</p>
+        <input type="number" name="pregunta1" required>
+
+        <p>2. ¿Cuántos Wookies aparecen en toda la saga?</p>
+        <input type="number" name="pregunta2" required>
+
+        <p>3. ¿Cuál es el nombre de la aeronave más pequeña en la primera película?</p>
+        <input type="text" name="pregunta3" required>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    {% if resultado %}
+        <h2>Resultados</h2>
+        <p>Pregunta 1: {{ resultado['pregunta1'] }}</p>
+        <p>Pregunta 2: {{ resultado['pregunta2'] }}</p>
+        <p>Pregunta 3: {{ resultado['pregunta3'] }}</p>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Wars Trivia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #000;
+            color: #fff;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Star Wars Capitulo: La caida del imperio de Python</h1>
+        <button onclick="fetchAnswers()">Mostrar Respuestas</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        async function fetchAnswers() {
+            const response = await fetch("/get_answers");
+            const data = await response.json();
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = `
+                <p><b>Películas con planetas áridos:</b> ${data.peliculas_aridos}</p>
+                <p><b>Wookies en toda la saga:</b> ${data.wookies}</p>
+                <p><b>Aeronave más pequeña en la primera película:</b> ${data.aeronave_pequena}</p>
+            `;
+        }
+    </script>
+</body>
+</html>
